@@ -1,0 +1,134 @@
+*{
+    box-sizing: border-box;
+}
+html{
+    font-family: 'Roboto';
+}
+
+ @font-face{
+    font-family: "Philosopher";
+    src: local("Philosopher");
+    src: url(../fonts/Philosopher-Regular.ttf);
+} 
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Regular.eot');
+    src: url('../fonts/Roboto-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Roboto-Regular.woff') format('woff'),
+    url('../fonts/Roboto-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    }
+
+body{
+    background-color: #ffe2b0;
+   
+}
+header{
+    text-align: center;
+    margin-bottom: 20px;
+}
+ul{
+    list-style-type: none;
+    text-align: center;
+    padding: 0px;   
+}
+li{
+    display: inline;
+    margin-right: 100px;
+}
+a{
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+}
+nav {
+    margin-bottom: 20px;   
+}
+a:hover{
+   color: red; 
+}
+li:last-child{
+    margin-right: 0px;
+}
+.section-1{
+    height: 640px;
+    background: url(../img/01-picture\ fone.jpg) center/cover no-repeat;
+    position: relative;
+    margin-bottom: 20px;   
+}
+.section-1__block{
+    padding-top: 15px;
+    position: absolute; top: 54%; left: 50%;
+    width: 420px;
+    height: 190px;
+    background: linear-gradient(180deg,rgba(244, 213, 178, 0.8)0%,rgba(234, 156, 65, 0.8)100%);
+}
+.section-1__border{
+    width: 390px;
+    height: 160px;
+    border: 1px solid black;
+    margin: auto;
+    padding: 17px 0 0 28px;
+    text-align: left;
+}
+
+.section-1__title{
+    font-size: 36px;
+    margin: 0;
+    margin-bottom: 9px;
+    font-family: 'Philosopher';
+}
+.section-1__text{
+    font-size: 12px;
+    margin: 0;
+}
+.section-2__pic{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.section-2__pic img {
+    margin-right: 76px;
+}
+.section-2__pic  :last-child{
+    margin-right: 0px;
+}
+.section-2__title{
+    font-size: 96px;
+    margin: 0; text-align: center;
+    font-family: 'Philosopher';
+}
+.section-2__span{
+    color: #f15b40;
+}
+.section-2__text2{
+    font-size: 18px; margin: 0 auto; 
+    text-align: center; width: 1000px;
+    margin-bottom: 20px;
+    
+}
+.section-3__title{
+    margin-bottom: 20px; font-size: 36px;
+    text-align: center;
+    font-family: 'Philosopher';
+}
+iframe{
+    display: block;
+    margin: 0 auto;
+    
+}
+.line{
+    height: 1px; width: 1024px;
+    margin: 0 auto; background-color: #999999;
+    margin-bottom: 20px;
+}
+.section-3{
+    margin-bottom: 20px;
+}
+footer {
+    height: 80px;
+}
+h1{
+    font-family: "Roboto";
+}
