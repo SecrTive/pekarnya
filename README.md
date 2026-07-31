@@ -66,6 +66,35 @@ files in a `fonts/` directory (see [Missing Assets](#missing-assets)).
 
 No `package.json`, no linters, and no test suite exist in this project.
 
+## Deployment
+
+The site is fully static — no build step — so it can be hosted on any
+static-file provider. Before publishing, resolve the
+[double-extension filename](#1-double-file-extension-on-main-page), since
+most hosts serve `index.html` by default:
+
+```bash
+git mv index.html.html index.html
+```
+
+> The assets referenced from `img/`, `icons/`, and `fonts/` are not in the
+> repository (see [Missing Assets](#missing-assets)). Add them before
+> publishing, or images and fonts will be broken on the live site.
+
+### GitHub Pages
+
+1. Push `main` to GitHub.
+2. Open **Settings → Pages** for the repository.
+3. Set **Source** to **Deploy from a branch**, pick `main` and the
+   `/root` directory, then save.
+4. The site publishes to `https://<owner>.github.io/pekarnya/`.
+
+### Other static hosts
+
+Upload the repository contents (after the rename above) to the web root
+of any static host — Netlify, Vercel, Cloudflare Pages, S3 + CloudFront,
+etc. No build command and no output directory are needed.
+
 ## Missing Assets
 
 The HTML and CSS reference several files that are **not included** in the
