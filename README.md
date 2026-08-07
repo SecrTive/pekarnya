@@ -154,3 +154,20 @@ manually in `index.html.html` (line 53).
 Several elements use fixed pixel widths (e.g., `.section-2__text2` at
 `width: 1000px`, `.line` at `width: 1024px`). The layout is not responsive
 and will overflow on viewports narrower than ~1024px.
+
+### 5. Incorrect `lang` attribute
+
+The `<html>` tag declares `lang="en"` (`index.html.html`, line 2), but every
+piece of visible content — the title, navigation, headings, and body copy —
+is in Russian. An incorrect `lang` value has two effects:
+
+- **Accessibility:** screen readers use `lang` to pick pronunciation rules,
+  so Russian text is read with English phonetics and becomes garbled.
+- **SEO:** search engines rely on `lang` for language detection and
+  localized ranking, so the page may be misclassified.
+
+Fix it by setting the attribute to Russian:
+
+```html
+<html lang="ru">
+```
