@@ -56,6 +56,26 @@ section-based convention reminiscent of BEM:
 Fonts are loaded via `@font-face` declarations referencing local font
 files in a `fonts/` directory (see [Missing Assets](#missing-assets)).
 
+#### Color Palette
+
+| Colour      | Hex / value                              | Used for                         |
+|-------------|------------------------------------------|----------------------------------|
+| Warm cream  | `#ffe2b0`                                | Body background                  |
+| Coral       | `#f15b40`                                | `.section-2__span` accent        |
+| Gray        | `#999999`                                | Footer separator line            |
+| Gradient    | `rgba(244,213,178,0.8)` → `rgba(234,156,65,0.8)` | `.section-1__block` overlay |
+| Black       | `black`                                  | Text, borders                    |
+| Red         | `red`                                    | Link hover state                 |
+
+#### Font Usage
+
+| Selector              | Font         | Notes                                  |
+|-----------------------|--------------|----------------------------------------|
+| `html` (default)      | Roboto       | Applied to all text unless overridden  |
+| `.section-1__title`   | Philosopher  | Hero heading ("Специальный заказ")     |
+| `.section-2__title`   | Philosopher  | "Выпечка - это вкусно"                 |
+| `.section-3__title`   | Philosopher  | "ЗАКАЗАТЬ"                             |
+
 ## Local Development
 
 1. Clone the repository.
@@ -171,3 +191,37 @@ Fix it by setting the attribute to Russian:
 ```html
 <html lang="ru">
 ```
+
+### 6. Misspelled `alt` text on logo image
+
+The logo `<img>` declares `alt="Логотоип"` (`index.html.html`, line 16).
+The correct Russian word for "logo" is **Логотип** — the sixth character
+should be `и`, not `о`. This is a visible typo in accessibility tools and
+screen-reader output.
+
+Fix:
+
+```html
+<img src="img/01-Logo.svg" alt="Логотип">
+```
+
+### 7. Placeholder filler text in content sections
+
+Both Section 1 (`.section-1__text`, line 31) and Section 2
+(`.section-2__text2`, line 45) contain generic bureaucratic Russian
+boilerplate ("Товарищи! рамки и место обучения кадров…") that has nothing
+to do with a bakery. This is template filler that was never replaced with
+real content. Replace both paragraphs with actual bakery copy before
+publishing.
+
+### 8. Redundant `h1` CSS rule
+
+`css/style.css` lines 132–134 set `h1 { font-family: "Roboto"; }`, but
+this rule is dead code:
+
+- `html` already sets `font-family: 'Roboto'` as the default (line 5).
+- The only `<h1>` on the page has class `.section-1__title`, which sets
+  `font-family: 'Philosopher'` (line 81) — a more specific selector that
+  wins.
+
+The `h1` block can be removed without any visual change.
