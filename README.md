@@ -225,3 +225,54 @@ this rule is dead code:
   wins.
 
 The `h1` block can be removed without any visual change.
+
+### 9. Hero overlay block is not horizontally centered
+
+`.section-1__block` (the semi-transparent gradient overlay containing the
+"Специальный заказ" heading) is positioned with `left: 50%` but lacks
+`transform: translateX(-50%)` (`css/style.css`, line 63). This places the
+**left edge** of the 420px-wide block at the 50% mark, shifting the entire
+overlay ~210px to the right of true center.
+
+Fix:
+
+```css
+.section-1__block {
+    /* existing properties… */
+    transform: translate(-50%, -50%);
+}
+```
+
+Adding `translateX(-50%)` (or `-50%, -50%` if vertical centering is also
+desired) shifts the block left by half its own width, centering it
+properly within the hero section.
+
+### 10. Broken `local()` fallback in Philosopher `@font-face`
+
+The `@font-face` declaration for Philosopher (`css/style.css`, lines 8–12)
+uses two separate `src` properties:
+
+```css
+src: local("Philosopher");
+src: url(../fonts/Philosopher-Regular.ttf);
+```
+
+In modern browsers the second `src` declaration **overwrites** the first,
+so `local("Philosopher")` is never evaluated. Even if the user has
+Philosopher installed system-wide, the browser skips the local copy and
+attempts to download the `.ttf` file (which is missing from the repo — see
+[Missing Assets](#missing-assets)). The result is a silent fallback to the
+default Roboto / system font for all heading text.
+
+Fix by combining both sources in a single `src` property:
+
+```css
+@font-face {
+    font-family: "Philosopher";
+    src: local("Philosopher"),
+         url(../fonts/Philosopher-Regular.ttf);
+}
+```
+
+With a comma-separated list the browser tries `local()` first and falls
+back to the URL only if the local font is unavailable.
