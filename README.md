@@ -175,6 +175,12 @@ Several elements use fixed pixel widths (e.g., `.section-2__text2` at
 `width: 1000px`, `.line` at `width: 1024px`). The layout is not responsive
 and will overflow on viewports narrower than ~1024px.
 
+The `<meta name="viewport" content="width=device-width, initial-scale=1.0">`
+tag (`index.html.html`, line 6) declares mobile-friendly intent, but the
+fixed-width CSS contradicts it: on phones the browser scales the entire
+1024px+ layout down to fit, making text and images tiny rather than
+reflowing the content.
+
 ### 5. Incorrect `lang` attribute
 
 The `<html>` tag declares `lang="en"` (`index.html.html`, line 2), but every
@@ -276,3 +282,38 @@ Fix by combining both sources in a single `src` property:
 
 With a comma-separated list the browser tries `local()` first and falls
 back to the URL only if the local font is unavailable.
+
+### 11. Overly broad `:last-child` selector in section-2 icon row
+
+The CSS rule that removes the right margin from the last icon
+(`css/style.css`, line 94) uses a **descendant combinator** — the space
+between `.section-2__pic` and `:last-child`:
+
+```css
+.section-2__pic  :last-child{
+    margin-right: 0px;
+}
+```
+
+This matches *any* element that is a `:last-child` anywhere inside
+`.section-2__pic`, not just the last `<img>`. It works today because the
+only children are three `<img>` elements, but it is fragile: if a
+non-image element (e.g., a `<span>` caption) is added after the icons,
+the selector would match that element instead, and the last icon would
+keep its `76px` right margin.
+
+Fix by scoping the selector to the last image:
+
+```css
+.section-2__pic img:last-child {
+    margin-right: 0px;
+}
+```
+
+Or use the direct-child combinator to limit depth:
+
+```css
+.section-2__pic > :last-child {
+    margin-right: 0px;
+}
+```
