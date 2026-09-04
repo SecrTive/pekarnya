@@ -177,9 +177,11 @@ and will overflow on viewports narrower than ~1024px.
 
 The `<meta name="viewport" content="width=device-width, initial-scale=1.0">`
 tag (`index.html.html`, line 6) declares mobile-friendly intent, but the
-fixed-width CSS contradicts it: on phones the browser scales the entire
-1024px+ layout down to fit, making text and images tiny rather than
-reflowing the content.
+fixed-width CSS contradicts it: `width=device-width` sets the layout
+viewport to the device width (e.g., ~390px on a phone), so the 1000–1024px
+blocks simply **overflow** it. The page requires horizontal panning — the
+browser does *not* scale the layout down to fit, because shrink-to-fit
+only happens when a viewport meta tag is missing.
 
 ### 5. Incorrect `lang` attribute
 
@@ -267,8 +269,9 @@ In modern browsers the second `src` declaration **overwrites** the first,
 so `local("Philosopher")` is never evaluated. Even if the user has
 Philosopher installed system-wide, the browser skips the local copy and
 attempts to download the `.ttf` file (which is missing from the repo — see
-[Missing Assets](#missing-assets)). The result is a silent fallback to the
-default Roboto / system font for all heading text.
+[Missing Assets](#missing-assets)). The Philosopher `font-family` lists on
+the headings have no fallback families, so the result is a silent fallback
+to the browser's default font for all heading text.
 
 Fix by combining both sources in a single `src` property:
 
