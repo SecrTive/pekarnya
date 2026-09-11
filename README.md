@@ -286,6 +286,14 @@ Fix by combining both sources in a single `src` property:
 With a comma-separated list the browser tries `local()` first and falls
 back to the URL only if the local font is unavailable.
 
+> **Don't "fix" the Roboto block the same way.** The Roboto `@font-face`
+> (`css/style.css`, lines 14–22) also declares `src` twice, but that
+> duplication is the classic IE fallback pattern, not a bug: the second
+> `src` lists the `.eot` file first (with the `?#iefix` query suffix),
+> followed by `woff` and `truetype` sources, so no source is lost. Only
+> the Philosopher block drops a source (`local()`), because nothing
+> repeats it in the surviving `src`.
+
 ### 11. Overly broad `:last-child` selector in section-2 icon row
 
 The CSS rule that removes the right margin from the last icon
